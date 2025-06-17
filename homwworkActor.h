@@ -14,7 +14,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	void Move(); // 헤더에 선언만
+	void Move();
 
 public:
 	virtual void Tick(float DeltaTime) override;

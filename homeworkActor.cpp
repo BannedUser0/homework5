@@ -1,5 +1,5 @@
 #include "homeworkActor.h"
-#include "Math/UnrealMathUtility.h" // FMath »ç¿ë
+#include "Math/UnrealMathUtility.h" // FMath ì‚¬ìš©
 
 AhomeworkActor::AhomeworkActor()
 {
@@ -24,22 +24,19 @@ void AhomeworkActor::Move()
 	int YPos = 0;
 	int pastXPos = 0;
 	int pastYPos = 0;
-	int moveCount = 0;
 	int eventCount = 0;
 	float distance = 0.0f;
+	float totalDistanceCount = 0;
 
 	for (int i = 0; i < 10; i++) {
 		pastXPos = XPos;
 		pastYPos = YPos;
-		XPos = Step();
-		YPos = Step();
+		XPos += Step();
+		YPos += Step();
 
 		distance = FMath::Sqrt(FMath::Pow((XPos - pastXPos), 2.0f) + FMath::Pow((YPos - pastYPos), 2.0f));
-
-		moveCount += XPos + YPos;
-
+		totalDistanceCount += distance;
 		UE_LOG(LogTemp, Warning, TEXT("Position x : %d, y : %d"), XPos, YPos);
-		UE_LOG(LogTemp, Warning, TEXT("Total move : %d"), moveCount);
 
 		if (DiceRolling() > 3) {
 			UE_LOG(LogTemp, Warning, TEXT("Event occur"));
@@ -47,7 +44,7 @@ void AhomeworkActor::Move()
 		}
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Total Distance : %f"), distance);
+	UE_LOG(LogTemp, Warning, TEXT("Total Distance : %f"), totalDistanceCount);
 	UE_LOG(LogTemp, Warning, TEXT("Total Event : %d"), eventCount);
 	UE_LOG(LogTemp, Warning, TEXT("Finish"));
 }
